@@ -1,0 +1,20 @@
+version: "2.2"
+
+services:
+  nginx_server:
+    container_name: nginx_server
+    build:
+      context: ./
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./sites-enabled:/etc/nginx/sites-enabled:ro
+    networks:
+      - nginx-network
+
+networks:
+  nginx-network:
+    external:
+      name: nginx
